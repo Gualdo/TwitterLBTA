@@ -1,46 +1,27 @@
 //
-//  Cells.swift
+//  UserCell.swift
 //  TwitterLBTA
 //
-//  Created by Eduardo David De La Cruz Marrero on 4/11/17.
+//  Created by Eduardo de la Cruz on 6/11/17.
 //  Copyright © 2017 Eduardo de la Cruz. All rights reserved.
 //
 
 import LBTAComponents
-
-// MARK: - UserFooter (DatasourceCell) Class
-
-class UserFooter: DatasourceCell
-{
-    override func setupViews()
-    {
-        super.setupViews()
-        
-        backgroundColor = .green
-    }
-}
-
-// MARK: - UserHeader (DatasourceCell) Class
-
-class UserHeader: DatasourceCell
-{
-    override func setupViews()
-    {
-        super.setupViews()
-        
-        backgroundColor = .blue
-    }
-}
 
 // MARK: - UserCell (DataSourceCell) Class
 
 class UserCell: DatasourceCell
 {
     override var datasourceItem: Any?
-    {
+        {
         didSet
         {
-//            nameLabel.text = datasourceItem as? String
+            guard let user = datasourceItem as? User else { return }
+            
+            nameLabel.text = user.name
+            userNameLabel.text = user.username
+            bioTextView.text = user.bioText
+            profileImageView.image = user.profileImage
         }
     }
     
@@ -77,20 +58,23 @@ class UserCell: DatasourceCell
         let textView = UITextView()
         textView.text = "iPhone, iPad, iOS Programming Community. Join us to learn Swift, Objective-C and build iOS apps!"
         textView.font = UIFont.systemFont(ofSize: 15)
+        textView.backgroundColor = .clear
         
         return textView
     }()
     
     let followButton : UIButton =
     {
-        let twitterBlue = UIColor(r: 61.0, g: 167.0, b: 244.0)
         let button = UIButton()
         button.layer.cornerRadius = 5.0
         button.layer.borderColor = twitterBlue.cgColor
         button.layer.borderWidth = 1
         button.setTitle("Follow", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
         button.setTitleColor(twitterBlue, for: .normal)
+        button.setImage(#imageLiteral(resourceName: "Follow"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.imageEdgeInsets = UIEdgeInsets(top: 0.0, left: -8.0, bottom: 0.0, right: 0.0)
         
         return button
     }()
@@ -98,6 +82,9 @@ class UserCell: DatasourceCell
     override func setupViews()
     {
         super.setupViews()
+                
+        separatorLineView.isHidden = false
+        separatorLineView.backgroundColor = UIColor(r: 230.0, g: 230.0, b: 230.0)
         
         addSubview(profileImageView)
         addSubview(nameLabel)
@@ -109,7 +96,7 @@ class UserCell: DatasourceCell
         
         nameLabel.anchor(profileImageView.topAnchor, left: profileImageView.rightAnchor, bottom: nil, right: followButton.leftAnchor, topConstant: 0.0, leftConstant: 8.0, bottomConstant: 0.0, rightConstant: 12.0, widthConstant: 0.0, heightConstant: 20.0)
         
-        userNameLabel.anchor(nameLabel.bottomAnchor, left: nameLabel.leftAnchor, bottom: nil, right: nameLabel.rightAnchor, topConstant: 0.0, leftConstant: 0.0, bottomConstant: 0.0, rightConstant: 0.0, widthConstant: 0.0, heightConstant: 24.0)
+        userNameLabel.anchor(nameLabel.bottomAnchor, left: nameLabel.leftAnchor, bottom: nil, right: nameLabel.rightAnchor, topConstant: 0.0, leftConstant: 0.0, bottomConstant: 0.0, rightConstant: 0.0, widthConstant: 0.0, heightConstant: 20.0)
         
         bioTextView.anchor(userNameLabel.bottomAnchor, left: userNameLabel.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, topConstant: -4.0, leftConstant: -4.0, bottomConstant: 0.0, rightConstant: 0.0, widthConstant: 0.0, heightConstant: 0.0)
         

@@ -20,9 +20,27 @@ class HomeDatasourceController: DatasourceController
         self.datasource = homeDatasource
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat
+    {
+        return 0
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        return CGSize(width: view.frame.width, height: 150.0)
+        if let user = self.datasource?.item(indexPath) as? User
+        {
+            // Lets get an estimation of height of our cell based on user.bioText
+            
+            let approximateWidthOfBioTextView = view.frame.width - 12.0 - 50.0 - 12.0 - 2.0
+            let size = CGSize(width: approximateWidthOfBioTextView, height: 1000.0)
+            let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15)]
+            
+            let estimatedFrame = NSString(string: user.bioText).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
+            
+            return CGSize(width: view.frame.width, height: estimatedFrame.height + 66.0)
+        }
+        
+        return CGSize(width: view.frame.width, height: 200.0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize
@@ -32,6 +50,6 @@ class HomeDatasourceController: DatasourceController
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize
     {
-        return CGSize(width: view.frame.width, height: 100.0)
+        return CGSize(width: view.frame.width, height: 50.0)
     }
 }
