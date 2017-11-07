@@ -7,11 +7,15 @@
 //
 
 import LBTAComponents
+import TRON
+import SwiftyJSON
 
 // MARK: - HomeDatasourceControler (DatasourceController) Class
 
 class HomeDatasourceController: DatasourceController
-{
+{    
+    // MARK: - HomeDatasourceController Load
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -20,8 +24,15 @@ class HomeDatasourceController: DatasourceController
         
         setupNavigationBarItems()
         
-        let homeDatasource = HomeDatasource()
-        self.datasource = homeDatasource
+        Service.sharedIstance.fetchHomeFeed { (homeDatasource) in
+            
+            self.datasource = homeDatasource
+        }
+    }
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator)
+    {
+        collectionViewLayout.invalidateLayout() // Rotation to landscape
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat

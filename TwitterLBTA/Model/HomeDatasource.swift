@@ -7,45 +7,53 @@
 //
 
 import LBTAComponents
+import TRON
+import SwiftyJSON
 
 // MARK: - HomeDatasource (Datasource) Class
 
-class HomeDatasource: Datasource
+class HomeDatasource: Datasource, JSONDecodable
 {
-    let users : [User] =
-    {
-        let gualdoUser = User(name: "Eduardo De La Cruz", username: "@gualdillo", bioText: "iPhone, iPad, iOS Programming Community. Join us to learn Swift, Objective-C and build iOS apps!", profileImage: #imageLiteral(resourceName: "ProfilePicture"))
-        
-        let rayUser = User(name: "Ray Wenderlich", username: "@rwenderlich", bioText: "Ray Wenderlich is an iPhone developer and tweets on topics related to iPhone, software, and gaming. Check out our conference.", profileImage: #imageLiteral(resourceName: "RayWnderlich"))
-        
-        let kindleCourseUser = User(name: "Kindle Course", username: "@kindleCourse", bioText: "This recently course on https://videos.letsbuildthatapp.com/basic-training provides some excellent guidance on how to use UITableView an UICollectionView. This course also teaches some basics on the Swift languaje, for example If Statements and For Loops. This will be an excelent purchase for you.", profileImage: #imageLiteral(resourceName: "ProfilePicture"))
-        
-        return [gualdoUser, rayUser, kindleCourseUser]
-    }()
+    // MARK: - Global Variables
     
-    let tweets : [Tweet] =
+    let users : [User]
+    let tweets : [Tweet]
+    
+    // MARK: - Users and tweet Init
+    
+    required init(json: JSON) throws
     {
-        let gualdoUser = User(name: "Eduardo De La Cruz", username: "@gualdillo", bioText: "iPhone, iPad, iOS Programming Community. Join us to learn Swift, Objective-C and build iOS apps!", profileImage: #imageLiteral(resourceName: "ProfilePicture"))
-        let tweet = Tweet(user: gualdoUser, message: "Welcome to episode 9 of the Twitter Series, really hope you guys are ejoying the series so far. I really really need a long text block to render out so we´re going to stop here.")
-        let tweet2 = Tweet(user: gualdoUser, message: "This is the second tweet message for our sample project. Very very exciting message.....")
+        let usersJsonArray = json["users"].array
         
-        return[tweet, tweet2]
-    }()
+        self.users = (usersJsonArray!.map{ User(json: $0) })
+        
+        let tweetsJsonArray = json["tweets"].array
+        
+        self.tweets = tweetsJsonArray!.map{ Tweet(json: $0) }
+    }
+    
+    // MARK: - Footer Class override
     
     override func footerClasses() -> [DatasourceCell.Type]?
     {
         return [UserFooter.self]
     }
     
+    // MARK: - Header Class override
+    
     override func headerClasses() -> [DatasourceCell.Type]?
     {
         return [UserHeader.self]
     }
     
+    // MARK: - Cell Class override
+    
     override func cellClasses() -> [DatasourceCell.Type]
     {
         return [UserCell.self, TweetCell.self]
     }
+    
+    // MARK: - Item at indexPath
     
     override func item(_ indexPath: IndexPath) -> Any?
     {
@@ -57,10 +65,14 @@ class HomeDatasource: Datasource
         return users[indexPath.item]
     }
     
+    // MARK: - Number of sections
+    
     override func numberOfSections() -> Int
     {
         return 2
     }
+    
+    // MARK: - Numer of items in section
     
     override func numberOfItems(_ section: Int) -> Int
     {
