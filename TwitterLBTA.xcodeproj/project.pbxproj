@@ -13,6 +13,8 @@
 		A3539D761FB0AEDD007CD08F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3539D751FB0AEDD007CD08F /* User.swift */; };
 		A3539D781FB0B579007CD08F /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3539D771FB0B579007CD08F /* UserCell.swift */; };
 		A3A1D7541FB204E10089C1B0 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A1D7531FB204E10089C1B0 /* Service.swift */; };
+		A3A1D7571FB22DA50089C1B0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A1D7561FB22DA50089C1B0 /* Constants.swift */; };
+		A3A1D7591FB2468D0089C1B0 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A1D7581FB2468D0089C1B0 /* Extensions.swift */; };
 		A3A8A2891FACDFC20070C0D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A8A2881FACDFC20070C0D6 /* AppDelegate.swift */; };
 		A3A8A2901FACDFC20070C0D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3A8A28F1FACDFC20070C0D6 /* Assets.xcassets */; };
 		A3A8A2931FACDFC20070C0D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3A8A2911FACDFC20070C0D6 /* LaunchScreen.storyboard */; };
@@ -30,6 +32,8 @@
 		A3539D751FB0AEDD007CD08F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A3539D771FB0B579007CD08F /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		A3A1D7531FB204E10089C1B0 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		A3A1D7561FB22DA50089C1B0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A3A1D7581FB2468D0089C1B0 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A3A8A2851FACDFC20070C0D6 /* TwitterLBTA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterLBTA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3A8A2881FACDFC20070C0D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3A8A28F1FACDFC20070C0D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -92,6 +96,15 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		A3A1D7551FB22D960089C1B0 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				A3A1D7561FB22DA50089C1B0 /* Constants.swift */,
+				A3A1D7581FB2468D0089C1B0 /* Extensions.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		A3A8A27C1FACDFC20070C0D6 = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				A3A8A2881FACDFC20070C0D6 /* AppDelegate.swift */,
+				A3A1D7551FB22D960089C1B0 /* Helpers */,
 				2DC938D11FAE6E50008A3D5A /* Controller */,
 				A3FB5B4E1FB0EC55009F06AB /* Extensions */,
 				2DC938D21FAE6E68008A3D5A /* Model */,
@@ -294,9 +308,11 @@
 				2DC938D51FAE6F09008A3D5A /* UserHeaderFooter.swift in Sources */,
 				A3EDD3901FAD0B3F00589FD5 /* HomeDatasourceController.swift in Sources */,
 				A3A8A29B1FACE1EA0070C0D6 /* HomeController.swift in Sources */,
+				A3A1D7591FB2468D0089C1B0 /* Extensions.swift in Sources */,
 				A3A1D7541FB204E10089C1B0 /* Service.swift in Sources */,
 				A3539D781FB0B579007CD08F /* UserCell.swift in Sources */,
 				A3FB5B501FB0ECC6009F06AB /* HomeDatasourceControllerNavBarExtension.swift in Sources */,
+				A3A1D7571FB22DA50089C1B0 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

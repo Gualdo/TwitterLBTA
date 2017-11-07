@@ -20,14 +20,14 @@ class UserCell: DatasourceCell
             
             nameLabel.text = user.name
             userNameLabel.text = user.username
-            bioTextView.text = user.bioText
-            profileImageView.image = user.profileImage
+            bioTextView.text = user.bioText            
+            profileImageView.loadImage(urlString: user.profileImageUrl)
         }
     }
     
-    let profileImageView : UIImageView =
+    let profileImageView : CachedImageView =
     {
-        let imageView = UIImageView()
+        let imageView = CachedImageView()
         imageView.image = #imageLiteral(resourceName: "ProfilePicture")
         imageView.layer.cornerRadius = 5
         imageView.clipsToBounds = true

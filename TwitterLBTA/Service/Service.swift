@@ -14,7 +14,7 @@ struct Service
 {
     // MARK: - Global variables
     
-    let tron = TRON(baseURL: "https://api.letsbuildthatapp.com")
+    let tron = TRON(baseURL: ServerDataURLS.serverBaseURL)
     
     static let sharedIstance = Service()
     
@@ -30,19 +30,20 @@ struct Service
     
     // MARK: - JSON Request
     
-    func fetchHomeFeed(completion: @escaping (HomeDatasource) -> ())
+    func fetchHomeFeed(completion: @escaping (HomeDatasource?, Error?) -> ())
     {
         // Start our JSON Fetch here
         // First ? Class type for success on network request, second ? failure error response
         //let request : APIRequest<?, ?> = tron.request("")
-        let request : APIRequest<HomeDatasource, JSONError> = tron.request("/twitter/home")
+        let request : APIRequest<HomeDatasource, JSONError> = tron.request(ServerDataURLS.usersAndTweetsURL)
         
         request.perform(withSuccess: ({ (homeDatasource) in
             
-            completion(homeDatasource)
+            completion(homeDatasource, nil)
             
         })) { (err) in
-            print("Failed to fetch json...", err)
+            
+            completion(nil, err)
         }
     }
 }

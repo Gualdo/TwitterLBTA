@@ -23,13 +23,12 @@ class HomeDatasource: Datasource, JSONDecodable
     
     required init(json: JSON) throws
     {
-        let usersJsonArray = json["users"].array
+        guard let usersJsonArray = json["users"].array, let tweetsJsonArray = json["tweets"].array else {
+            throw NSError(domain: "com.letsbuildthatapp", code: 1, userInfo: [NSLocalizedDescriptionKey : "Parsing JSON was not valid."])
+        }
         
-        self.users = (usersJsonArray!.map{ User(json: $0) })
-        
-        let tweetsJsonArray = json["tweets"].array
-        
-        self.tweets = tweetsJsonArray!.map{ Tweet(json: $0) }
+        self.users = try usersJsonArray.decode()
+        self.tweets = try tweetsJsonArray.decode()
     }
     
     // MARK: - Footer Class override
